@@ -18,11 +18,14 @@ class ExcelReportOutput:
     try:
       template = openpyxl.load_workbook(self.template_path)
       print('template has been opened')
+      ws = template.active
+      for row in ws.iter_rows(min_row=1, max_row=10, min_col=1, max_col=5):
+        for cell in row:
+          if cell.value is not None:
+            print(f"Data found in {cell.coordinate}: {cell.value}")
     except Exception:
       print(Exception)
       print('failed to load file')
-
-
 
 
   """
