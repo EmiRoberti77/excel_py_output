@@ -1,0 +1,39 @@
+{
+  "clients": [
+    {
+      "name": "Client A",
+      "reportDate": "2025-04-20",
+      "netDelivery": {
+        "measuredEntity": "Linear TV, Meta, Google",
+        "mediaType": "Video",
+        "reach": 33714428,
+        "reachPercent": 61.34,
+        "frequency": 5.14
+      },
+      "platforms": [
+        {
+          "name": "YouTube AMI",
+          "gross": 4785800,
+          "unique": 2196084
+        },
+        {
+          "name": "Linear TV AMI",
+          "gross": 24449999,
+          "unique": 18239093
+        },
+        {
+          "name": "Meta AMI",
+          "gross": 10897385,
+          "unique": 5605160
+        }
+      ],
+      "deduplicated": {
+        "total": 33714428,
+        "duplication": 6418756,
+        "duplicationPercent": 16,
+        "crossover": 7674091,
+        "crossoverPercent": 22.76
+      }
+    }
+  ]
+}
