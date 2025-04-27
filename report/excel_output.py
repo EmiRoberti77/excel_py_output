@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import openpyxl
 import random
 import os
+import json
 load_dotenv()
 
 MIN_ROW=int(os.getenv('MIN_ROW'))
@@ -16,9 +17,10 @@ _SEP = ":"
 class to produce excel output
 """
 class ExcelReportOutput:
-  def __init__(self, template_path, output_path):
+  def __init__(self, template_path, output_path, input_path):
     self.template_path = template_path
     self.output_path = output_path
+    self.input_path = input_path
     print(self.template_path)
     print(self.output_path)
   
@@ -75,11 +77,17 @@ class ExcelReportOutput:
       case "{o_t_2}":
         return self.computeResult()
       case "{o_t_3}":
-        return self.computeResult()
+        return self.extractFromJson(value)
       case _:
        return 0
       
 
   def computeResult(self):
     return random.randint(200, 4000)
+  
+  def extractFromJson(self, value):
+    f = open(self.input_path)
+    data = json.load(f)
+    client = data["clients"][0]
+    return client["deduplicated"]["duplication"]
 
