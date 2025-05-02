@@ -46,6 +46,18 @@ class ExcelReportOutput:
             for row in template_ws.iter_rows(min_row=MIN_ROW, max_row=MAX_ROW, min_col=MIN_COL, max_col=MAX_COL):
                 for cell in row:
                     self.copy_cell(cell, ws[cell.coordinate])
+            # Copy column widths
+            for col in range(MIN_COL, MAX_COL + 1):
+                col_letter = openpyxl.utils.get_column_letter(col)
+                template_width = template_ws.column_dimensions[col_letter].width
+                if template_width:
+                    ws.column_dimensions[col_letter].width = template_width
+
+            # Copy row heights
+            for row in range(MIN_ROW, MAX_ROW + 1):
+                template_height = template_ws.row_dimensions[row].height
+                if template_height:
+                    ws.row_dimensions[row].height = template_height
 
         except Exception as e: 
             print(e)
@@ -93,6 +105,8 @@ class ExcelReportOutput:
                 return self.extractFromJson(value)
             case "{o_t_4}":
                 return self.extractFromJson(value)
+            case "{o_t_5}":
+                return self.computeResult()
             case _:
                 return value
 
