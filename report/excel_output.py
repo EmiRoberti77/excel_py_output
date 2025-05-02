@@ -106,12 +106,16 @@ class ExcelReportOutput:
             case "{o_t_4}":
                 return self.extractFromJson(value)
             case "{o_t_5}":
+                return self.extractFromJson(value)
+            case "{o_t_6}":
+                return self.extractFromJson(value)
+            case "{o_t_7}" | "{o_t_8}" | "{o_t_9}" | "{o_t_9}" | "{o_t_10}" | "{o_t_11}" | "{o_t_12}" | "{o_t_13}" | "{o_t_14}":
                 return self.computeResult()
             case _:
                 return value
 
     def computeResult(self):
-        return random.randint(200, 4000)
+        return random.randint(100000, 10000000)
 
     def extractFromJson(self, value):
         f = open(self.input_path)
@@ -126,7 +130,7 @@ class ExcelReportOutput:
         if value == "{o_t_4}":
             return client["netDelivery"][1]["reach"]
         if value == "{o_t_5}":
-            return client["netDelivery"][2]["reachPercent"]
-        if value == "{o_t_5}":
-            return client["netDelivery"][3]["frequency"]
+            return client["netDelivery"][1]["reachPercent"]
+        if value == "{o_t_6}":
+            return client["netDelivery"][1]["frequency"]
         return None
