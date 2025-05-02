@@ -98,9 +98,9 @@ class ExcelReportOutput:
         print('value=>', value)
         match value:
             case "{o_t_1}":
-                return self.computeResult()
+                return self.extractFromJson(value)
             case "{o_t_2}":
-                return self.computeResult()
+                return self.extractFromJson(value)
             case "{o_t_3}":
                 return self.extractFromJson(value)
             case "{o_t_4}":
@@ -117,8 +117,16 @@ class ExcelReportOutput:
         f = open(self.input_path)
         data = json.load(f)
         client = data["clients"][0]
+        if value == "{o_t_1}":
+            return client["netDelivery"][0]["reach"]
+        if value == "{o_t_2}":
+            return client["netDelivery"][0]["reachPercent"]
         if value == "{o_t_3}":
-            return client["deduplicated"]["duplication"]
+            return client["netDelivery"][0]["frequency"]
         if value == "{o_t_4}":
-            return client["deduplicated"]["duplicationPercent"]
+            return client["netDelivery"][1]["reach"]
+        if value == "{o_t_5}":
+            return client["netDelivery"][2]["reachPercent"]
+        if value == "{o_t_5}":
+            return client["netDelivery"][3]["frequency"]
         return None
